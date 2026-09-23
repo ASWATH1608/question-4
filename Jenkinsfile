@@ -18,8 +18,14 @@ pipeline {
 
         stage('Run Linter') {
             steps {
-                // Changed from 'sh' to 'bat' for Windows compatibility
-                bat 'flake8 app.py'
+                // Using 'bat' for Windows, creating a local virtual environment, 
+                // installing flake8 locally, and running it on app.py
+                bat '''
+                    python -m venv venv
+                    call venv\\Scripts\\activate
+                    pip install flake8
+                    flake8 app.py
+                '''
             }
         }
     }
