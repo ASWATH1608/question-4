@@ -4,24 +4,22 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                // Clones your repository code
-                checkout scm
+                echo 'Checking out source code...'
             }
         }
 
         stage('Show Build Info') {
             steps {
-                // Prints the requested Jenkins environment variables
-                echo "Build Number: ${env.BUILD_NUMBER}"
-                echo "Job Name: ${env.JOB_NAME}"
-                echo "Workspace Path: ${env.WORKSPACE}"
+                // Printing the specific environment variables requested
+                echo "BUILD_NUMBER: ${env.BUILD_NUMBER}"
+                echo "JOB_NAME: ${env.JOB_NAME}"
+                echo "WORKSPACE: ${env.WORKSPACE}"
             }
         }
 
         stage('Run Linter') {
             steps {
-                // Installs flake8 and runs it on app.py
-                sh 'pip install flake8'
+                // Runs flake8 on the app.py file
                 sh 'flake8 app.py'
             }
         }
