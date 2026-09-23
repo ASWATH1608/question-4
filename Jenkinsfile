@@ -17,10 +17,16 @@ pipeline {
             }
         }
 
-        stage('Run Linter') {
+                stage('Run Linter') {
             steps {
-                // Runs flake8 on the app.py file
-                sh 'flake8 app.py'
+                // Creates a virtual environment, installs flake8, and runs it safely
+                sh '''
+                    python3 -m venv venv
+                    . venv/bin/activate
+                    pip install flake8
+                    flake8 app.py
+                '''
+          
             }
         }
     }
